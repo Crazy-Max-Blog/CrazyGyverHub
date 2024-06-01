@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      class HubUI {
+        constructor(id, f) {
+          this.ui = document.getElementById(id);
+          this.EventFunc=f;
+          var data='{"type":"btn", "ID":"btn1", "TEXT":"BTN_TEXT"}';
+          console.log(this.getWHtml(JSON.parse(data), this.EventFunc));
+        }
+        
+        getWHtml(data, EF) {
+          var elh=eval(UI_Els[data["type"]]);
+          return elh;
+        }
+        
+        addEl(data) {
+          data=JSON.parse(data);
+          var d = document.createElement('div');
+          d.id=data["id"];
+          if(data['bk']=='1') d.style.background='#26272c';
+          d.style.borderRadius='8px';
+          d.style.boxShadow='0px 3px 0px 0px inset #ffffff05, 0 0 10px 0px #00000021, 0px -3px 1px 0px inset #00000010';
+          //d.style.left='50%';
+          //d.style.position='absolute';
+          d.innerHTML+=`<div><div>${data['label']}</div></div>`;
+          d.innerHTML+="<div style='display: flex;align-items: center;justify-content: center;'>"+this.getWHtml(data, this.EventFunc)+"</div>";
+          this.ui.appendChild(d);
+        }
+        
+        pushEvent(id) {
+          console.log(`${id}: click`);
+        }
+      }
+      
+      UI_Els = {
+        "btn": '`<button onclick=\'${EF}("${data["id"]}")\'>${data["text"]}</button>`',
+        "text": '`<div onclick=\'${EF}("${data["id"]}")\'>${data["text"]}</div>`',
+      }
+    </script>
+    
+    <style>
+      .block {
+          width: 50%;
+          height: 100%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+      }
+      
+      body {
+        background-color: #1b1c20;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div class="block" id='ui' style='position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;'></div>
+    
+    <script>
+      //Window.onload = function() {
+        let ui = new HubUI('ui', 'ui.pushEvent');
+        ui.addEl('{"type":"btn","bk":"1","label":"l1","id":"btn1","text":"BTN_TEXT"}');
+        ui.addEl('{"type":"text","bk":"1","label":"Text","id":"t1","text":"Some CrazyText"}');
+      //}
+    </script>
+  </body>
+</html>

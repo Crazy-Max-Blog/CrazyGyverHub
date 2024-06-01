@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src='ui_els.js'></script>
+    <script src='main.js'></script>
+    <style>
+      .block {
+          width: 50%;
+          height: 100%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+      }
+      
+      body {
+        background-color: #1b1c20;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div class="block" id='ui' style='position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;'></div>
+    
+    <script>
+      //Window.onload = function() {
+        let ui = new HubUI('ui', 'ui.pushEvent');
+        ui.addEl('{"type":"btn","bk":"1","label":"l1","id":"btn1","text":"BTN_TEXT"}');
+        ui.addEl('{"type":"text","bk":"1","label":"Text","id":"t1","text":"Some CrazyText"}');
+      //}
+    </script>
+  </body>
+</html>
