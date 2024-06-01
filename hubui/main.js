@@ -2,7 +2,7 @@ class HubUI {
   constructor(id, f) {
     this.ui = document.getElementById(id);
     this.EventFunc=f;
-    var data='{"type":"btn", "ID":"btn1", "TEXT":"BTN_TEXT"}';
+    var data='{"type":"btn", "id":"btn1", "text":"BTN_TEXT"}';
     console.log(this.getWHtml(JSON.parse(data), this.EventFunc));
   }
   
@@ -11,18 +11,24 @@ class HubUI {
     return elh;
   }
   
-  addEl(data) {
+  addElHtml(data) {
     data=JSON.parse(data);
+    var dd = document.createElement('div');
+    dd.id=data["id"];
     var d = document.createElement('div');
-    d.id=data["id"];
     if(data['bk']=='1') d.style.background='#26272c';
     d.style.borderRadius='8px';
     d.style.boxShadow='0px 3px 0px 0px inset #ffffff05, 0 0 10px 0px #00000021, 0px -3px 1px 0px inset #00000010';
-    //d.style.left='50%';
+    d.style.width='100%';
     //d.style.position='absolute';
     d.innerHTML+=`<div><div>${data['label']}</div></div>`;
     d.innerHTML+="<div style='display: flex;align-items: center;justify-content: center;'>"+this.getWHtml(data, this.EventFunc)+"</div>";
-    this.ui.appendChild(d);
+    dd.appendChild(d);
+    return dd;
+  }
+  
+  addEl(data) {
+    this.ui.appendChild(this.addElHtml(data));
   }
   
   pushEvent(id) {
