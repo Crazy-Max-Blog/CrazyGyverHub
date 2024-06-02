@@ -4,18 +4,22 @@ class HubUI {
     this.EventFunc=f;
     var data='{"type":"btn", "id":"btn1", "text":"BTN_TEXT"}';
     console.log(this.getWHtml(JSON.parse(data), this.EventFunc));
+    this.EF=this.pushEvent.name;
   }
   
   getWHtml(data, EF) {
-    var elh=eval(UI_Els[data["type"]]);
-    return elh;
+    var c = eval(UI_Els[data["type"]]);
+    var o = new c(data, EF);
+    return o.getHtml();
   }
   
   addElHtml(data) {
     data=JSON.parse(data);
     var dd = document.createElement('div');
     dd.id=data["id"];
-    dd.style.padding='3px';
+    var c = eval(UI_Els[data["type"]]);
+    var o = new c(data, this.EF);
+    if(o.p) dd.style.padding='3px';
     dd.style.width='100%';
     var d = document.createElement('div');
     if(data['bk']=='1') {
