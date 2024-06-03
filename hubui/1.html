@@ -24,7 +24,8 @@
     
     <script>
       //Window.onload = function() {
-        let ui = new HubUI('ui', 'ui.pushEvent');
+        function pushEvent(data) {console.log(data);}
+        let ui = new HubUI('ui', 'pushEvent');
         ui.addEl('{"type":"btn","bk":"1","label":"l1","id":"btn1","text":"BTN_TEXT"}');
         //ui.addEl('{"type":"text","bk":"1","label":"Text","id":"t1","text":"Some CrazyText"}');
         //ui.addEl('{"type":"col","bk":"0","label":"Text","id":"col","text":[{"type":"btn","bk":"1","label":"l1","id":"btn1","text":"BTN_TEXT"}, {"type":"text","bk":"1","label":"Text","id":"t1","text":"Some CrazyText"}]}');

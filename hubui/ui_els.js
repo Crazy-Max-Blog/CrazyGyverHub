@@ -9,14 +9,25 @@ class HubUI_btn {
         this.data=data;
         this.EF=EF;
         this.p=0;
+        console.log('HubUIBTN');
+        uieafl.push(this.eventF);
+        this.fid=uieafl.length-1;
         console.log(this.getHtml());
     }
     
     getHtml() {
-        return `<button class="uibtn" onclick=\'eventF("${this.data["id"]}")\'>${this.data["text"]}</button>`
+        return `<button class="uibtn" onclick='uieafl[${this.fid}](event, "${this.EF}","${this.data["id"]}")'>${this.data["text"]}</button>`
     }
     
-    eventF(id) {
-        eval(`${this.EF}(${id})`);
+    //attach(el) {
+    //    el.addEventListener("mousedown", uieafl[this.fid](this.EF,this.data["id"]));
+    //}
+    
+    eventF(e, EF, id) {
+        console.log(e);
+        event="release";
+        eval(`${EF}({"type":"event", "id":"${id}", "event":"${event}"})`);
     }
 }
+
+uieafl=[]
